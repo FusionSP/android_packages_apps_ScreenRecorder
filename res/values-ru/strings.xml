@@ -11,10 +11,10 @@
     <string name="notification_recording_error_title">Ошибка записи</string>
     <string name="notification_recording_error_text">%s</string>
 
-    <string name="notification_video_processing_title">Обработка записанного видео</string>
+    <string name="notification_video_processing_title">Обработка записи...</string>
 
-    <string name="notification_action_stop_recording">Остановить запись</string>
-    <string name="notification_action_show_touch">Показывать нажатия</string>
+    <string name="notification_action_stop_recording">Стоп</string>
+    <string name="notification_action_show_touch">Нажатия</string>
 
     <string name="error_unable_to_create_directory">Не удалось создать каталог для сохранения.</string>
     <string name="error_external_storage_unavailable">Нет доступа к внешнему хранилищу.</string>
