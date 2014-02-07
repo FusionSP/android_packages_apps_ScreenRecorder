@@ -70,6 +70,7 @@ public class ScreenRecorderService extends IntentService
     private static String sCurrentFileName;
     private static ScreenRecorder sScreenRecorder;
     private static MediaActionSound sActionSound = new MediaActionSound();
+    private static boolean sTouchEnabledByDefault = false;
 
     public ScreenRecorderService() {
         super(TAG);
@@ -86,6 +87,13 @@ public class ScreenRecorderService extends IntentService
         } else {
             sActionSound.play(MediaActionSound.STOP_VIDEO_RECORDING);
             sScreenRecorder.stop();
+
+// set SHOW_TOUCHES to false if sTouchEnabledByDefault is false
+            if (!sTouchEnabledByDefault) {
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.SHOW_TOUCHES, 0);
+            }
+
             postProcessingNotification();
         }
     }
@@ -337,6 +345,7 @@ public class ScreenRecorderService extends IntentService
         } else if (ACTION_NOTIFY_TOGGLE_SHOW_TOUCHES.equals(action)) {
             final boolean showTouches = Settings.System.getInt(getContentResolver(),
                     Settings.System.SHOW_TOUCHES, 0) == 1;
+			sTouchEnabledByDefault = showTouches;
             Settings.System.putInt(getContentResolver(),
                     Settings.System.SHOW_TOUCHES, showTouches ? 0 : 1);
             // call postRecordingNotification so the icon gets updated based on this change
