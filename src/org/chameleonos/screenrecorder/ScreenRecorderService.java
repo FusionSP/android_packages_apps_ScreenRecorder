@@ -155,7 +155,8 @@ public class ScreenRecorderService extends IntentService
     @Override
     public void onRecordingFinished() {
         stopForeground(true);
-        postRecordingFinishedNotification();
+        postFinishedNotification();
+        //postRecordingFinishedNotification();
     }
 
     @Override
@@ -200,6 +201,19 @@ public class ScreenRecorderService extends IntentService
                 .setAutoCancel(true)
                 .setOngoing(false)
                 .setContentTitle(getString(R.string.notification_video_processing_title))
+                .setSmallIcon(R.drawable.ic_notify_screen_recorder)
+                .setWhen(System.currentTimeMillis())
+                .build();
+        nm.notify(NOTIFICATION_ID, notice);
+    }
+
+    private void postFinishedNotification() {
+        NotificationManager nm =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification notice = new Notification.Builder(this)
+                .setAutoCancel(true)
+                .setOngoing(false)
+                .setContentTitle(getString(R.string.notification_video_finished_title))
                 .setSmallIcon(R.drawable.ic_notify_screen_recorder)
                 .setWhen(System.currentTimeMillis())
                 .build();
