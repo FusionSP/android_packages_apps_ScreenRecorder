@@ -163,8 +163,8 @@ public class ScreenRecorderService extends IntentService
     @Override
     public void onRecordingFinished() {
         stopForeground(true);
-        postFinishedNotification();
-        //postRecordingFinishedNotification();
+        //postFinishedNotification();
+        postRecordingFinishedNotification();
     }
 
     @Override
@@ -215,7 +215,7 @@ public class ScreenRecorderService extends IntentService
         nm.notify(NOTIFICATION_ID, notice);
     }
 
-    private void postFinishedNotification() {
+/*    private void postFinishedNotification() {
         NotificationManager nm =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notice = new Notification.Builder(this)
@@ -227,7 +227,7 @@ public class ScreenRecorderService extends IntentService
                 .build();
         nm.notify(NOTIFICATION_ID, notice);
     }
-
+*/
     private void postRecordingFinishedNotification() {
         long screenRecordTime = System.currentTimeMillis();
         Uri uri = Uri.fromFile(new File(RECORDER_PATH + File.separator + sCurrentFileName));
@@ -270,7 +270,7 @@ public class ScreenRecorderService extends IntentService
                         PendingIntent.getBroadcast(this, 0, deleteIntent,
                                 PendingIntent.FLAG_CANCEL_CURRENT));
 
-        // try and grab a frame as a preview
+/*        // try and grab a frame as a preview
         MediaMetadataRetriever mmr = new MediaMetadataRetriever();
         mmr.setDataSource(RECORDER_PATH + File.separator + sCurrentFileName);
         Bitmap thumbnail = mmr.getFrameAtTime();
@@ -282,7 +282,7 @@ public class ScreenRecorderService extends IntentService
                             sCurrentFileName));
             b.setStyle(style);
         }
-
+*/
         nm.notify(NOTIFICATION_ID, b.build());
     }
 
